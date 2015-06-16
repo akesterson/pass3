@@ -1,0 +1,22 @@
+deploy:
+  provider: pypi
+  user: akesterson
+  password:
+    secure: H0XRotyZm7xxpkR5bTxyjWSnwrUQUscKIj9Miqn9l1aROZN3GQ4oLLP8Epa590UQ/VLSlKQ28oalejlbDHG452K1726NAytO3r/0Oy/htuBf5DoR3VCa+aivOjeCVd2Axgc0385BB2ouG8aYJOL7Lc0sJ9fFUG7pQ2f3lZlzZLo=
+  on:
+    tags: true
+    branch: master
+
+language: python
+sudo: false
+env:
+  - TOXENV=py26
+  - TOXENV=py27
+  - TOXENV=py32
+  - TOXENV=py33
+  - TOXENV=py34
+  - TOXENV=pypy
+install:
+  - travis_retry pip install tox
+script:
+  - tox
