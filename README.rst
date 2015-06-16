@@ -4,7 +4,7 @@ pass3
 |PyPI|
 |Build Status|
 
-An application for storing, retrieving, and managing user passwords. Similar to Lastpass or Keeper, but does not use a centralized service.
+An application and library for storing, retrieving, and managing user passwords. Similar to Lastpass or Keeper, but does not use a centralized service.
 
 How does it work
 ================

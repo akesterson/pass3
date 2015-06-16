@@ -13,14 +13,16 @@ long_description = open(
 if __name__ == "__main__":
     setup(
         name="pass3",
-        url="https://www.github.com/akesterson/pass3-python",
+        url="https://www.github.com/akesterson/pass3",
         version=pass3.version.VERSION,
-        description="Filesystem-like pathing and searching for dictionaries",
+        description="An application and library for storing, retrieving, and managing user passwords. Similar to Lastpass or Keeper, but does not use a centralized service.",
         long_description=long_description,
         author=("Andrew Kesterson"),
         author_email="andrew@aklabs.net",
         license="MIT",
-        install_requires=[],
+        install_requires=[
+            'boto'
+            ],
         scripts=[
             'scripts/pass3'
             ],
