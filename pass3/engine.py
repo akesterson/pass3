@@ -16,7 +16,6 @@ class Engine(object):
         self.__storage__.store(record)
 
     def search(self, scheme=None, host=None, path=None, title=None):
-        print "Matching against %d records" % self.__storage__.size()
         for record in self.__storage__.iteritems():
             if record.match(scheme, host, path, title):
                 yield record
