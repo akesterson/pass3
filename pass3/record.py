@@ -49,11 +49,11 @@ class Record(object):
     
     def add_alternate(self, record):
         if not issubclass(record.__class__, Record):
-            raise TypeError("Object %s is not a subclass of Record" % repr(record))
+            raise TypeError("Object {} is not a subclass of Record".format(repr(record)))
         self.alternates.append(record)
         
     def __repr__(self):
-        return "<%s object at %s> (%s : %s @ %s://%s/%s)" % (
+        return "<{} object at {}> ({} : {} @ {}://{}/{})".format(
             self.__class__.__name__,
             id(self),
             self.title,

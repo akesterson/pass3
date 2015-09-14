@@ -124,7 +124,7 @@ def decrypt_stream(stream, cipher, outstream, passphrase, chunkbytes=64*1024):
         raise pass3.exceptions.EncryptionError("Bad cipher or not encrypted for this recipient")
     cipher = json.loads(decrypted_cipher, None)
     if not cipher:
-        raise pass3.exceptions.EncryptionError("Unable to decrypt, invalid cipher: %s" % cipher)
+        raise pass3.exceptions.EncryptionError("Unable to decrypt, invalid cipher: {}".format(cipher))
     decryptor = AES.new(
         base64.b64decode(cipher['key']),
         AES.MODE_CBC,

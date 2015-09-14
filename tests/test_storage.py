@@ -27,7 +27,7 @@ def test_S3Storage():
     access_key = cfg['storage']['S3Storage']['access_key']
     secret_access_key = cfg['storage']['S3Storage']['secret_access_key']
     bucket = cfg['storage']['S3Storage']['bucket']
-    cfg['storage']['S3Storage']['file'] = "pass3-%d_%d_%d.json" % (
+    cfg['storage']['S3Storage']['file'] = "pass3-{}_{}_{}.json".format(
         sys.version_info[0],
         sys.version_info[1],
         sys.version_info[2]

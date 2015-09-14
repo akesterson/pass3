@@ -12,7 +12,7 @@ class Engine(object):
 
     def store(self, record):
         if not issubclass(record.__class__, pass3.record.Record):
-            raise TypeError("Object %s is not a subclass of Record" % repr(record))
+            raise TypeError("Object {} is not a subclass of Record".format(repr(record)))
         self.__storage__.store(record, passphrase=self.__passphrase__)
 
     def search(self, scheme=None, host=None, path=None, title=None):

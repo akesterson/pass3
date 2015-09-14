@@ -42,8 +42,8 @@ def get_config(path=None):
         except Exception, e:
             if ( ifile ):
                 ifile.close()
-            raise Exception("While reading config in %s : %s" % (path, str(e)))
-    raise IOError("No config file found in any of the following locations: \n\t%s" % ("\n\t".join(default_paths)))
+            raise Exception("While reading config in {} : {}".format(path, str(e)))
+    raise IOError("No config file found in any of the following locations: \n\t{}".format("\n\t".join(default_paths)))
 
 def save(path=None):
     """

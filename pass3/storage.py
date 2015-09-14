@@ -96,7 +96,7 @@ class S3Storage(MemoryStorage):
                 self.__archive__ = json.loads(key.get_contents_as_string())
             except boto.exception.S3ResponseError as e:
                 if ('404' in [str(e.status), str(e.error_code)]):
-                    logging.warning("%s not found in S3; creating a new archive..." % self.__filename__)
+                    logging.warning("{} not found in S3; creating a new archive...".format(self.__filename__))
         return self.__archive__
 
     def store_archive(self):
