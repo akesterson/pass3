@@ -44,7 +44,7 @@ class MemoryStorage(object):
             return archive
         try:
             decrypted = pass3.encryption.decrypt_message(archive['message'], archive['cipher'], passphrase)
-        except ValueError, e:
+        except ValueError as e:
             raise pass3.exceptions.PasswordException(str(e))
         doc = json.loads(decrypted)
         doc['records'] = [pass3.record.Record.from_dict(x) for x in doc['records']]
@@ -94,7 +94,7 @@ class S3Storage(MemoryStorage):
             try:
                 key = boto.s3.key.Key(self.__bucket__, self.__filename__)
                 self.__archive__ = json.loads(key.get_contents_as_string())
-            except boto.exception.S3ResponseError, e:
+            except boto.exception.S3ResponseError as e:
                 if ('404' in [str(e.status), str(e.error_code)]):
                     logging.warning("%s not found in S3; creating a new archive..." % self.__filename__)
         return self.__archive__
