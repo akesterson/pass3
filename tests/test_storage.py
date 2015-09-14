@@ -6,6 +6,7 @@ import boto.s3.connection
 import boto.s3.key
 import json
 import sys
+import time
 
 def test_memory_archive_encrypted():
     storage = pass3.storage.MemoryStorage()
@@ -56,5 +57,7 @@ def test_S3Storage():
 
     key = boto.s3.key.Key(bucket, filename)
     doc = storage.get_archive()
-    bucket.delete_key(filename)
-    assert(key.get_contents_as_string() == json.dumps(doc))
+    try:
+        assert(key.get_contents_as_string() == json.dumps(doc))
+    finally:
+        bucket.delete_key(filename)
