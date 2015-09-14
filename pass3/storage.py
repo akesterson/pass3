@@ -65,7 +65,7 @@ class S3Storage(MemoryStorage):
     all queries are performed against the in-memory copy (but the directory is
     decrypted on each query).
     """
-    def __init__(self, access_key, secret_access_key, bucket, passphrase):
+    def __init__(self, access_key, secret_access_key, bucket, filename, passphrase):
         super(S3Storage, self).__init__()
         self.__aws__ = boto.s3.connection.S3Connection(
             access_key,
@@ -73,6 +73,7 @@ class S3Storage(MemoryStorage):
             calling_format = boto.s3.connection.OrdinaryCallingFormat()
             )
         self.__bucket__ = self.__aws__.get_bucket(bucket)
+        self.__filename__ = filename
         
     def store(self, record, passphrase):
         archive = self.decrypt_archive(passphrase)
@@ -91,13 +92,13 @@ class S3Storage(MemoryStorage):
     def get_archive(self):
         if (not 'cipher' in self.__archive__.keys()) and (len(self.__archive__.get('records', 0)) == 0):
             try:
-                key = boto.s3.key.Key(self.__bucket__, 'pass3.json')
+                key = boto.s3.key.Key(self.__bucket__, self.__filename__)
                 self.__archive__ = json.loads(key.get_contents_as_string())
             except boto.exception.S3ResponseError, e:
                 if ('404' in [str(e.status), str(e.error_code)]):
-                    logging.warning("pass3.json not found in S3; creating a new archive...")
+                    logging.warning("%s not found in S3; creating a new archive..." % self.__filename__)
         return self.__archive__
 
     def store_archive(self):
-        key = boto.s3.key.Key(self.__bucket__, 'pass3.json')
+        key = boto.s3.key.Key(self.__bucket__, self.__filename__)
         key.set_contents_from_string(json.dumps(self.__archive__))
