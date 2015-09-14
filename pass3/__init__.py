@@ -1,4 +1,7 @@
 from __future__ import absolute_import
 from pass3.engine import Engine
 from pass3.record import Record
-from pass3.storage import SimpleStorage
+import pass3.storage
+import pass3.config
+import pass3.encryption
+import pass3.exceptions

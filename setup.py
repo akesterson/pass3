@@ -1,5 +1,4 @@
 from distutils.core import setup
-import pass3.version
 import os
 import sys
 
@@ -14,14 +13,15 @@ if __name__ == "__main__":
     setup(
         name="pass3",
         url="https://www.github.com/akesterson/pass3",
-        version=pass3.version.VERSION,
+        version='0.0.1',
         description="An application and library for storing, retrieving, and managing user passwords. Similar to Lastpass or Keeper, but does not use a centralized service.",
         long_description=long_description,
         author=("Andrew Kesterson"),
         author_email="andrew@aklabs.net",
         license="MIT",
         install_requires=[
-            'boto'
+            'boto',
+            'pycrypto'
             ],
         scripts=[
             'scripts/pass3'

@@ -8,6 +8,26 @@ class Record(object):
         self.title = title
         self.alternates = []
 
+    def to_dict(self):
+        ret = {}
+        for key in ['scheme', 'host', 'path', 'user', 'password', 'title']:
+            ret[key] = getattr(self, key)
+        ret['alternates'] = [x.to_dict() for x in self.alternates]
+        return ret
+    
+    @staticmethod
+    def from_dict(obj):
+        ret = Record(
+            obj['scheme'],
+            obj['host'],
+            obj['path'],
+            obj['user'],
+            obj['password'],
+            obj['title']
+            )
+        ret.alternates = [Record.from_dict(x) for x in obj['alternates']]
+        return ret
+        
     def match(self, scheme=None, host=None, path=None, title=None):
         """
         Return True if this record (or any of its alternates) match the parameters
